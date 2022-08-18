@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weather API</title>
+  <title>T.P.S</title>
+  
+  <link rel="stylesheet" href="/static/홈.css">  
+
+</head>
+<body>
+
+  <div class="container">
+
+    <header id="intro">
+        <h1>
+            <img class="로고" src="/static/로고.png" alt="로고">
+            <a href="/">태양을 피하고 싶었조</a>
+        </h1> 
+       
+        <nav>
+            <ul>
+                <li class="소개"><a href="#">소개</a></li>
+                <li class="만든사람들"><a href="#">만든사람들</a></li>
+                <li class="고객센터"><a href="#">고객센터</a></li>
+            </ul>
+        </nav>
+    </header>
+  </div>
+  <main role="main" id="main">
+
+    <article class="경고">
+        <a href="#">
+            <img src="image1.png" alt="White Rabbit">
+            <h2>경고</h2>
+        </a>
+    </article>
+    
+    <article class="날씨">
+        <a href="#">
+            <h2>현재 날씨</h2>
+            <h3 class="time">현재 시간: </h3>
+            <h3 class="ctemp">현재 온도: </h3>
+            <h3 class="lowtemp">최저 온도: </h3>
+            <h3 class="hightemp">최고 온도: </h3>
+            <h3 class="icon"></h3>
+        ​
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            
+            <script>
+                $.getJSON(
+                    'https://api.openweathermap.org/data/2.5/weather?q=gwangju&appid=829e25f53b77c6b6b0625be2efca16bc&units=metric', 
+                    function(
+                        result) {
+                        
+                        $('.ctemp').append(result.main.temp);
+                        $('.lowtemp').append(result.main.temp_min);
+                        $('.hightemp').append(result.main.temp_max);
+                        var wiconUrl = '<img src="http://openweathermap.org/img/wn/' + result.weather[0].icon + '.png" alt="' + result.weather[0].description + '">'
+                        $('.icon').html(wiconUrl);
+        ​
+                        var ct = result.dt;
+        ​
+                        function convertTime(t){
+                            var ot = new Date(t*1000);
+                            var year = ot.getFullYear();
+                            var month = ot.getMonth() + 1;
+                            var date = ot.getDate();
+                            var hr = ot.getHours();
+                            var m = ot.getMinutes();
+                            var s = ot.getSeconds();
+                            var day = ot.getDate();
+        ​
+        ​
+                            return year+'년 '+month+'월 '+date+'일 '+hr+'시 '+m+'분 '+s+'초 '
+        ​
+        ​
+                        }
+        ​
+                        var currentTime = convertTime(ct)
+                        $('.time').append(currentTime);
+                    });
+            </script>
+        </a>
+    </article>
+    
+    <article class="내일">
+        <a href="#">
+            <img src="image3.png" alt="Queen of Hearts">
+            <h2>내일의 태양광</h2>
+        </a>
+    </article>
+    
+    <article class="월">
+        <a href="/월_입력">
+            <img src="image4.png" alt="Mad Hatter">
+            <h2>90일의 태양광</h2>
+        </a>
+    </article>
+
+    <article class="년">
+        <a href="#">
+            <img src="image4.png" alt="Mad Hatter">
+            <h2>365일의 태양광</h2>
+        </a>
+    </article>
+
+</main>
+
+
+<footer id="footer">
+
+    <div class="copyright">
+        <p>Copyright © Cloud_B_태양을피하고싶었조. All rights reserved.</p>
+    </div>
+
+    <div class="address">
+        <p>광주 동구 제봉로 92 1~3층 인공지능사관학교 Cloud_B_태양을피하고싶었조</p>
+    </div>
+
+</footer>
+
+</body>
+</html>
