@@ -100,10 +100,10 @@ input, select, textarea {
 
 	body {
 		background-color: #ebc489;
-		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
+		background-image: url("images/overlay.png"), -moz-linear-gradient(45deg, #FFBB00 15%, #FAED7D 85%);
+		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #FFBB00 15%, #FAED7D 85%);
+		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #FFBB00 15%, #FAED7D 85%);
+		background-image: url("images/overlay.png"), linear-gradient(45deg, #FFBB00 15%, #FAED7D 85%);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -3811,91 +3811,33 @@ input, select, textarea {
 
 		}
 /* custom */
+	.day_article,
+	.month_article,
+	.warning_article {
+		width: 100%;
+		height: 500px;
+
+	}
+
+	.input_article,
+	.month_input_article {
+		width: 100%;
+		height: 200px;
+
+	}
 	.article_graph {
 		float: left;
 		margin: 0 1% 0 0;
 		width: 49%;
 		height: 500px;
 	}
-	.graph_wrap {
-		max-width: 800px;
+
+	.day_graph,
+	.month_graph, 
+	.smp_graph, 
+	.warning_img {
 		width: 100%;
 		height: 100%;
-		margin: 0 auto;
-		padding:20px;
-	}
-		
-	.graph {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		margin-top: 15px;
-	}
-	
-	.graph .y-axis {
-		position: absolute;
-		bottom: 16px;
-		width: 100%;
-		height: 100%;
-		z-index: 1;
-	}
-	
-	.graph .x-axis {
-		position: absolute;
-		display: flex;
-		bottom: -15px;
-		left: 25px;
-		width: calc(100% - 25px);
-		justify-content: space-around;
-		align-items: flex-end;
-		text-align: center;
-		z-index: 2;
-	}
-	
-	.graph .x-axis > li {
-		list-style:none;
-		padding-left:0px;
-		font-size: 20px;
-		width: 100%;
-		margin: 0 1%;
-	}
-	
-	.graph .bar {
-		display: flex;
-		position: absolute;
-		left: 26px;
-		bottom: 16px;
-		width: calc(100% - 25px);
-		height: calc(100% - 16px);
-		justify-content: space-around;
-		align-items: flex-end;
-		text-align: center;
-		z-index: 3;
-	}
-	
-	.graph .bar > li {
-		list-style:none;
-		padding-left:0px;
-		width: 100%;
-		margin: 0 1%;
-	}
-	
-	.graph .bar > li span {
-		display: inline-block;
-		max-width: 80px;
-		width: 100%;
-		height: 100%;
-		background: #f1cb7e;
-	}
-	
-	.graph .bar:before {
-		content:'';
-		position: absolute;
-		top: -2px;
-		left: 15px;
-		height: calc(100% + 4px);
-		width: 1px;
-		background: #8c8c8c;
 	}
 
 	.article_text {
@@ -3903,4 +3845,12 @@ input, select, textarea {
 		margin: 0 0 0 1%;
 		width: 49%;
 		height: 500px;
+	}
+	
+	.smp_text,
+	.month_text {
+		float: left;
+		margin: 0 0 2% 0;
+		width: 100%;
+		height: 48%;
 	}

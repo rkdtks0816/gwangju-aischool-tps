@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>T.P.S</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/static/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/static/assets/css/noscript.css" /></noscript>
+		<script>
+			var warning_img = {{warning_img|tojson}}
+			document.write(`
+				<style>
+					.warning_article {
+						width: 100%;
+						height: calc(500px*`+warning_img.length+`);
+
+					}
+					.warning_img {
+						width: 100%;
+						height: calc(100%/`+warning_img.length+`);
+					}
+				</style>
+			`)
+		</script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="/"><span class="logo"><img src="/static/images/logo.png" alt="" /></span></a> 
+						<h1>T.P.S</h1>
+						<!-- <p>태양을 피하고 싶었조<br /> -->
+						built by <a href="https://twitter.com/ajlkn">태양을 피하고 싶었조</a> </p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#day_section" class="active">내일 시간별 발전량</a></li>
+							<li><a href="#month_section">90일 일별 발전량</a></li>
+							<li><a href="#warning_section">Warning</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<!-- day_section -->
+							<section id="day_section" class="main special">
+								<article class="day_article">
+									<!-- <article class="article_graph"> -->
+										예상 총 발전량 : {{day_total}}Kw
+										<img class="day_graph" src="/static/images/day_graph.png">
+									<!-- </article>
+									<article class="article_text">
+										어제 예상 발전량 실제 발전량 비교
+										<img class="yesterday_graph" src="/static/images/yesterday_graph.png">
+									</article> -->
+								</article>
+							</section>
+
+						<!-- month_section -->
+						<section id="month_section" class="main special">
+							<header class="major">
+								<h2>90일</h2>
+							</header>
+							<article class="month_input_article">
+								<div class="입력창">
+									<form action="/month" id="month" method="get">
+										기간
+										<input type="date" name="month_start" id="month_start">
+										~
+										<input type="date" name="month_end" id="month_end">
+									</form>
+									<script>
+										document.getElementById('month_start').value = new Date().toISOString().substring(0, 10);;
+										document.getElementById('month_start').min = new Date().toISOString().substring(0, 10);;
+										document.getElementById('month_end').value = new Date().toISOString().substring(0, 10);;
+										document.getElementById('month_end').min = new Date().toISOString().substring(0, 10);;
+									</script>
+								</div>
+							</article>
+							<footer class="major">
+								<input type="submit" name="month_submit" id="month_submit" form="month">
+							</footer>
+						</section>
+					
+					<!-- warning_section -->
+						<section id="warning_section" class="main special">
+							<article class="warning_article">
+								<script>
+									var warning_img = {{warning_img|tojson}}
+									for (var i = 0; i < (warning_img.length); i ++){
+										document.write('<img class="warning_img" src="/static/images/'+warning_img[i]+'.png">')
+									}
+								</script>
+							</article>
+						</section>
+
+				</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<!-- <h2>Copyright © Cloud_B_태양을피하고싶었조. All rights reserved.</h2> -->
+							<!-- <p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p> -->
+							<p>Copyright © Cloud_B_태양을피하고싶었조. All rights reserved.</p>
+							<ul class="actions">
+								<li><a href="/templates/generic.html" class="button">Learn More</a></li>
+							</ul>
+						</section>
+						<section>
+							<!-- <h2>Etiam feugiat</h2> -->
+							<dl class="alt">
+								<dt>Address</dt>
+								<!-- <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd> -->
+								<dd>광주 동구 제봉로 92 1~3층 인공지능사관학교</dd>
+								<dt>Phone</dt>
+								<dd>010-0816-0816</dd>
+								<dt>Email</dt>
+								<dd><a href="#">rkdtks@naver.com</a></dd>
+							</dl>
+							<ul class="icons">
+								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+							</ul>
+						</section>
+						<!-- <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> -->
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+
+	</body>
+</html>

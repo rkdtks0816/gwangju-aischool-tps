@@ -11,26 +11,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/static/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="/static/assets/css/noscript.css" /></noscript>
-		<style>
-			.graph .y-axis > li {
-				list-style:none;
-				padding-left:0px;
-				position: relative;
-				width:calc(100% - 20px);
-				height: calc(100% / ({{y_value}} / 100 + 1));
-				margin-left: 20px;
-				border-bottom: 1px solid #8c8c8c;
-				text-align: : left;
-			}
-		
-			.graph .y-axis > li span {
-				position: absolute;
-				top: calc(100% / ({{y_value}} / 100 + 1) - 11px);
-				left: -40px;
-				font-size: 20px;
-				line-height: 1;
-			}
-		</style>
+		<script>
+			var warning_img = {{warning_img|tojson}}
+			document.write(`
+				<style>
+					.warning_article {
+						width: 100%;
+						height: calc(500px*`+warning_img.length+`);
+
+					}
+					.warning_img {
+						width: 100%;
+						height: calc(100%/`+warning_img.length+`);
+					}
+				</style>
+			`)
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -39,7 +35,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="/static/images/logo.png" alt="" /></span>
+						<a href="/"><span class="logo"><img src="/static/images/logo.png" alt="" /></span></a> 
 						<h1>T.P.S</h1>
 						<!-- <p>태양을 피하고 싶었조<br /> -->
 						built by <a href="https://twitter.com/ajlkn">태양을 피하고 싶었조</a> </p>
@@ -48,149 +44,79 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#intro" class="active">내일의 태양광</a></li>
-							<li><a href="#first">Solar of 90 days</a></li>
-							<li><a href="#second">Solar of 365 days</a></li>
+							<li><a href="#day_section">내일 시간별 발전량</a></li>
+							<li><a href="#month_section" class="active">90일 일별 발전량</a></li>
+							<li><a href="#warning_section">Warning</a></li>
 						</ul>
 					</nav>
 
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Introduction -->
-							<section id="intro" class="main">
-								<div class="spotlight">
-									<div class="content">
-										<header class="major">
-											<h2>입력</h2>
-										</header>
-										<p>여기에서 입력을 받고</p>
-										<ul class="actions">
-											<li><a href="/templates/generic.html" class="button">Learn More</a></li>
-										</ul>
-									</div>
-									<span class="image"><img src="/static/images/pic01.jpg" alt="" /></span>
-								</div>
-							</section>
-
-						<!-- First Section -->
-							<section id="first" class="main special">
-								<header>
-									<form action="/month_result" id="each_month" method="get">
-										<select name="each_month" form="each_month">
-											<script>
-												var month_change = {{month_change|tojson}};
-												var start_month = {{start_month|tojson}};
-												var input_month = {{input_month|tojson}};
-												for (var i = 0; i < (month_change.length-1); i ++){
-												  if (i+1 == input_month){
-													document.write('<option selected value="'+String(i+1)+'">'+String(start_month+i)+'월</option>')
-												  }else {
-													document.write('<option value="'+String(i+1)+'">'+String(start_month+i)+'월</option>')
-												  }
-												};
-											  </script>
-										</select>
-										<input type="submit" name="each_month_submit" id="each_month_submit">
-								  	</form>
-								</header>
-								<article class="article_graph">
-									<div class="graph_wrap">
-										<div class="graph">
-											<!-- 기준 -->
-											<ul class="y-axis">
-											<script>
-												var date_list = {{date_list|tojson}};
-												var y_value = {{y_value|tojson}};
-												for (var i = y_value; i >= 0; i -= 100){
-												document.write("<li id='y_li'><span id='y_span'>"+i+"</span></li>")
-												};
-											</script>
-											</ul>
-										
-											<!-- 목록 -->
-											<ul class="x-axis">
-											<script>
-												var date_list = {{date_list|tojson}};
-												var month_change = {{month_change|tojson}};
-												var input_month = {{input_month|tojson}};
-												for (var i = (month_change[input_month-1]+1); i < (month_change[input_month]+1); i++){
-												document.write("<li><span>"+date_list[i]+"</span></li>")
-												};
-											</script>
-											</ul>
-										
-											<!-- 바 그래프 (백분율 만큼 heigh값) -->
-											<ul class="bar">
-											<script>
-												var photovoltaics_predict_percent = {{photovoltaics_predict_percent|tojson}};
-												var month_change = {{month_change|tojson}};
-												var input_month = {{input_month|tojson}};
-												for (var i = (month_change[input_month-1]+1); i < (month_change[input_month]+1); i++){
-												document.write('<li style="height:'+photovoltaics_predict_percent[i]+'%;"><span></span></li>')
-												};
-											</script>
-											</ul>
-										</div>
-									</div>
-								</article>
+						<!-- day_section -->
+						<section id="day_section" class="main special">
+							<article class="day_article">
+								<!-- <article class="article_graph"> -->
+									예상 총 발전량 : {{day_total}}Kw
+									<img class="day_graph" src="/static/images/day_graph.png">
+								<!-- </article>
 								<article class="article_text">
-									<article class="month_text">
+									어제 예상 발전량 실제 발전량 비교
+									<img class="yesterday_graph" src="/static/images/yesterday_graph.png">
+								</article> -->
+							</article>
+						</section>
 
-									</article>
+						<!-- month_section -->
+						<section id="month_section" class="main special">
+							<header>
+								<form action="/month_result" id="month_select" method="get">
+									<select name="month_select">
+										<script>
+											var month_change = {{month_change|tojson}};
+											var start_month = {{start_month|tojson}};
+											var input_month_select = {{input_month_select|tojson}};
+											for (var i = 0; i < (month_change.length-1); i ++){
+											  if (i+1 == input_month_select){
+												document.write('<option selected value="'+String(i+1)+'">'+String(start_month+i)+'월</option>')
+											  }else {
+												document.write('<option value="'+String(i+1)+'">'+String(start_month+i)+'월</option>')
+											  }
+											};
+										  </script>
+									</select>
+									<input type="submit" name="month_submit" id="month_submit">
+								</form>
+							</header>
+							<article class="month_article">
+								<article class="article_graph">
+									예상 총 발전량 : {{month_total}}Kw
+									<script>
+										var start_month = {{start_month|tojson}};
+										var input_month_select = {{input_month_select|tojson}};
+										document.write('<img class="month_graph" src="/static/images/month_graph'+String(start_month+input_month_select-1)+'.png">')
+									</script>
 								</article>
-							</section>
-
-						<!-- Second Section -->
-							<section id="second" class="main special">
-								<header class="major">
-									<h2>또또입력</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
-								</header>
-								<ul class="statistics">
-									<li class="style1">
-										<span class="icon solid fa-code-branch"></span>
-										<strong>5,120</strong> Etiam
-									</li>
-									<li class="style2">
-										<span class="icon fa-folder-open"></span>
-										<strong>8,192</strong> Magna
-									</li>
-									<li class="style3">
-										<span class="icon solid fa-signal"></span>
-										<strong>2,048</strong> Tempus
-									</li>
-									<li class="style4">
-										<span class="icon solid fa-laptop"></span>
-										<strong>4,096</strong> Aliquam
-									</li>
-									<li class="style5">
-										<span class="icon fa-gem"></span>
-										<strong>1,024</strong> Nullam
-									</li>
-								</ul>
-								<p class="content">Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum ac arcu sit amet, fermentum pellentesque et purus. Integer maximus varius lorem, sed convallis diam accumsan sed. Etiam porttitor placerat sapien, sed eleifend a enim pulvinar faucibus semper quis ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer eget purus nec nulla mattis et accumsan ut magna libero. Morbi auctor iaculis porttitor. Sed ut magna ac risus et hendrerit scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras eu ornare dui curabitur lacinia.</p>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="/templates/generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
-							</section>
-
-						<!-- Get Started -->
-							<section id="cta" class="main special">
-								<header class="major">
-									<h2>Warning</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
-								</header>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="/templates/generic.html" class="button primary">Get Started</a></li>
-										<li><a href="/templates/generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
+								<article class="article_text">									
+									예상 smp 수익 : {{smp_total}}원
+									<script>
+										var start_month = {{start_month|tojson}};
+										document.write('<img class="smp_graph" src="/static/images/smp_graph'+String(start_month+input_month_select-1)+'.png">')
+									</script>
+								</article>
+							</article>
+						</section>
+					
+						<!-- warning_section -->
+							<section id="warning_section" class="main special">
+								<article class="warning_article">
+									<script>
+										var warning_img = {{warning_img|tojson}}
+										for (var i = 0; i < (warning_img.length); i ++){
+											document.write('<img class="warning_img" src="/static/images/'+warning_img[i]+'.png">')
+										}
+									</script>
+								</article>
 							</section>
 
 					</div>

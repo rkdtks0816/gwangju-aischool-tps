@@ -1,7 +1,10 @@
+matplotlib
+csv
+joblib
 numpy
 flask
-sklearn
 requests
+selenium
 bs4
 pandas
 datetime
