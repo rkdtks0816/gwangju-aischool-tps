@@ -1,0 +1,7 @@
+numpy
+flask
+sklearn
+requests
+bs4
+pandas
+datetime
